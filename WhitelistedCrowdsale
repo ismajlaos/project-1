@@ -1,0 +1,20 @@
+contract WhitelistedCrowdsale {
+
+  mapping(address => bool) public whitelist;
+
+  
+  modifier isWhitelisted(address _beneficiary) {
+    require(whitelist[_beneficiary]);
+    _;
+  }
+
+ 
+  function addToWhitelist(address _beneficiary)  {
+    whitelist[_beneficiary] = true;
+  }
+
+ 
+  function removeFromWhitelist(address _beneficiary) {
+    whitelist[_beneficiary] = false;
+  }
+} 
