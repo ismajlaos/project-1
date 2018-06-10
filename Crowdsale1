@@ -1,0 +1,38 @@
+pragma solidity ^0.4.21;
+
+contract Crowdsale1 {
+    
+    address private owner;
+    uint public total;
+    
+    struct Contributors {
+        address adr;
+        uint[] amount;
+    }
+    
+    
+    mapping (address => Contributors) cons;
+
+    constructor()  public {
+        owner = msg.sender;
+    }
+
+    function depositMoney (uint amount) public payable {
+        require(amount > 0);
+        
+        total += amount;
+        
+        cons[msg.sender].adr = msg.sender;
+        cons[msg.sender].amount.push(amount);
+    }
+    
+    
+    function getContributor() public view returns(address) {
+        return cons[msg.sender].adr;   
+    }
+    
+    
+    function getOwner() public view returns(address) {
+        return owner;
+    }
+}
